@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ConsertaConnect — Gestão de Assistência Técnica</title>
+<meta name="description" content="Sistema de ordens de serviço para assistência técnica de celulares e eletrônicos">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
+</head>
+<body>
+
+<!-- ================= TELA DE LOGIN ================= -->
+<section id="tela-auth" class="auth-screen hidden">
+  <div class="auth-card">
+    <div class="auth-brand">
+      <span class="brand-mark">🔧</span>
+      <div>
+        <h1>ConsertaConnect</h1>
+        <p>Gestão de assistência técnica</p>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="login" role="tab">Entrar</button>
+      <button class="tab" data-tab="cadastro" role="tab">Criar conta</button>
+    </div>
+
+    <form id="form-login" class="auth-form">
+      <label>E-mail
+        <input type="email" name="email" required autocomplete="email" placeholder="voce@empresa.com">
+      </label>
+      <label>Senha
+        <input type="password" name="senha" required autocomplete="current-password" placeholder="••••••••">
+      </label>
+      <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+      <p class="auth-msg" data-msg></p>
+    </form>
+
+    <form id="form-cadastro" class="auth-form hidden">
+      <label>Nome
+        <input type="text" name="nome" required autocomplete="name" placeholder="Seu nome">
+      </label>
+      <label>E-mail
+        <input type="email" name="email" required autocomplete="email" placeholder="voce@empresa.com">
+      </label>
+      <label>Senha
+        <input type="password" name="senha" required minlength="6" autocomplete="new-password" placeholder="Mínimo 6 caracteres">
+      </label>
+      <button type="submit" class="btn btn-primary btn-block">Criar conta</button>
+      <p class="auth-msg" data-msg></p>
+    </form>
+
+    <p class="auth-foot">Ao entrar você concorda com os termos de uso.</p>
+  </div>
+</section>
+
+<!-- ================= APP ================= -->
+<div id="app" class="app hidden">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">🔧</span>
+      <strong>ConsertaConnect</strong>
+    </div>
+
+    <nav class="nav">
+      <button class="nav-btn active" data-view="dashboard">Painel</button>
+      <button class="nav-btn" data-view="ordens">Ordens</button>
+      <button class="nav-btn" data-view="clientes">Clientes</button>
+    </nav>
+
+    <div class="user-area">
+      <span id="user-nome" class="user-nome"></span>
+      <button id="btn-sair" class="btn btn-ghost" title="Sair">Sair</button>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- ---------- PAINEL ---------- -->
+    <section id="view-dashboard" class="view active">
+      <div class="view-head">
+        <h2>Painel</h2>
+        <button class="btn btn-ghost" id="btn-atualizar">Atualizar</button>
+      </div>
+
+      <div class="cards">
+        <div class="card stat" data-stat="os_abertas">
+          <span class="stat-label">OS abertas</span>
+          <strong class="stat-value">—</strong>
+        </div>
+        <div class="card stat" data-stat="os_prontas">
+          <span class="stat-label">Prontas p/ retirada</span>
+          <strong class="stat-value">—</strong>
+        </div>
+        <div class="card stat" data-stat="aguardando_peca">
+          <span class="stat-label">Aguardando peça</span>
+          <strong class="stat-value">—</strong>
+        </div>
+        <div class="card stat" data-stat="faturado">
+          <span class="stat-label">Faturado</span>
+          <strong class="stat-value">—</strong>
+        </div>
+        <div class="card stat" data-stat="a_receber">
+          <span class="stat-label">A receber</span>
+          <strong class="stat-value">—</strong>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Últimas ordens</h3>
+        <div id="ultimas-ordens" class="list"></div>
+      </div>
+    </section>
+
+    <!-- ---------- ORDENS ---------- -->
+    <section id="view-ordens" class="view">
+      <div class="view-head">
+        <h2>Ordens de serviço</h2>
+        <div class="head-actions">
+          <input id="busca-ordens" class="input" type="search" placeholder="Buscar aparelho, cliente, IMEI...">
+          <select id="filtro-status" class="input">
+            <option value="">Todos os status</option>
+            <option value="aguardando">Aguardando</option>
+            <option value="em_analise">Em análise</option>
+            <option value="aguardando_peca">Aguardando peça</option>
+            <option value="em_reparo">Em reparo</option>
+            <option value="pronto">Pronto</option>
+            <option value="entregue">Entregue</option>
+            <option value="cancelado">Cancelado</option>
+          </select>
+          <button class="btn btn-primary" id="btn-nova-os">+ Nova OS</button>
+        </div>
+      </div>
+      <div id="lista-ordens" class="os-grid"></div>
+    </section>
+
+    <!-- ---------- CLIENTES ---------- -->
+    <section id="view-clientes" class="view">
+      <div class="view-head">
+        <h2>Clientes</h2>
+        <div class="head-actions">
+          <input id="busca-clientes" class="input" type="search" placeholder="Buscar por nome, telefone...">
+          <button class="btn btn-primary" id="btn-novo-cliente">+ Novo cliente</button>
+        </div>
+      </div>
+      <div class="card">
+        <div id="lista-clientes" class="list"></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ================= MODAL ================= -->
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modal-titulo">Título</h3>
+      <button class="btn-icon" id="modal-fechar" aria-label="Fechar">✕</button>
+    </div>
+    <div id="modal-corpo" class="modal-body"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

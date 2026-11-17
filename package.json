@@ -1,0 +1,20 @@
+{
+  "name": "consertaconnect",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sistema de gestão de ordens de serviço para assistência técnica — HTML/CSS/JS + Supabase",
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes serve . -l 3000",
+    "start": "npx --yes serve . -l 3000"
+  },
+  "keywords": [
+    "assistencia-tecnica",
+    "ordem-de-servico",
+    "supabase",
+    "vanilla-js",
+    "conserto",
+    "celular"
+  ],
+  "license": "MIT"
+}

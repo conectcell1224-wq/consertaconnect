@@ -1,0 +1,32 @@
+# Dependências
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Ambiente / segredos
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Build e logs
+dist/
+build/
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Editor / SO
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Supabase local
+supabase/.temp/
+supabase/.branches/
+.branches/
